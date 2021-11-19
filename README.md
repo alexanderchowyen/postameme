@@ -12,5 +12,3 @@
 
 Modified from Scotch.io's auth tutorial
 
-Button CSS: https://fdossena.com/?p=html5cool/buttons/i.frag
-https://thenounproject.com/search/?q=cat&i=1160970
