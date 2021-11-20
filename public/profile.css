@@ -4,6 +4,10 @@ body {
   color: white;
 }
 
+.container {
+  font-family: 'Righteous', cursive;
+  color: white;
+}
 
 a {
   text-decoration: none;
@@ -26,10 +30,6 @@ a {
 
 h1 {
   color: white;
-  font-family: 'Righteous', cursive;
-}
-
-.navbar {
   font-family: 'Righteous', cursive;
 }
 

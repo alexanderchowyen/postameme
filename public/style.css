@@ -4,11 +4,13 @@ body{
   box-sizing: border-box;
   margin: none;
   display: flex;
+  
 }
 
 h1 {
-  font-family: 'Raleway Dots', cursive;
+  font-family: 'Righteous', cursive;
   font-size: 4em;
+  color: white;
 }
 
 a:hover {
@@ -63,7 +65,7 @@ a:visited {
   border-radius: 30px;
 }
 
-button{
+button {
   display:inline-block;
   padding:0.5em 1.5em;
   margin:0 0.75em 0.75em 0;

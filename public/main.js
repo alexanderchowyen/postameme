@@ -1,7 +1,30 @@
 var heart = document.getElementsByClassName("fa-heart");
 var trash = document.getElementsByClassName("fa-trash");
+var bookmark = document.getElementsByClassName("fa-bookmark");
 var theLikes = document.getElementsByClassName("likes");
 
+
+Array.from(bookmark).forEach(function(element) {
+  element.addEventListener('click', function(){
+   
+    const postId= element.dataset.id
+    fetch('bookmark', {
+      method: 'put',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+    
+        'postId':postId
+      })
+    })
+    .then(response => {
+      if (response.ok) return response.json()
+    })
+    .then(data => {
+      console.log(data)
+      window.location.reload(true)
+    })
+  });
+});
 
 Array.from(heart).forEach(function(element) {
       element.addEventListener('click', function(){

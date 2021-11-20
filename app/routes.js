@@ -20,15 +20,21 @@ module.exports = function(app, passport, db) {
     });
 
     // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('posts').find({postedBy: req.user._id}).toArray((err, result) => {
-          if (err) return console.log(err)
+
+    app.get('/profile', isLoggedIn, function (req, res) {
+      console.log('bookmarks' , req.user.bookmarks)
+      db.collection('posts').find({ postedBy: req.user._id }).toArray((err, result) => {
+        if (err) return console.log(err)
+        db.collection('posts').find({ _id: { $in: req.user.bookmarks } }).toArray((err, bookmarks) => {
+          console.log(bookmarks)
           res.render('profile.ejs', {
-            user : req.user,
-            posts: result
+            user: req.user,
+            posts: result,
+            bookmarks: bookmarks
           })
         })
-    });
+      });
+    })
 
     app.get('/feed', isLoggedIn, function(req, res) {
       db.collection('posts').find().toArray((err, result) => {
@@ -113,6 +119,21 @@ module.exports = function(app, passport, db) {
         if (err) return res.send(err)
         res.send(result)
       })
+    })
+
+    app.put('/bookmark', (req, res) => {
+      db.collection('users')
+        .findOneAndUpdate({ _id: req.user._id }, {
+          $push: {
+            bookmarks: ObjectId(req.body.postId)
+          }
+        }, {
+          sort: { _id: -1 },
+          upsert: false
+        }, (err, result) => {
+          if (err) return res.send(err)
+          res.send(result)
+        })
     })
 
     app.delete('/deletePost', (req, res) => {
